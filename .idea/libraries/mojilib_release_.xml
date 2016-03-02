@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="mojilib-release-">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/MojiList/build/intermediates/exploded-aar/mojilib-release/res" />
+      <root url="jar://$PROJECT_DIR$/MojiList/build/intermediates/exploded-aar/mojilib-release/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
