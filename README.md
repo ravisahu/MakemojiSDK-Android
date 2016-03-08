@@ -29,12 +29,7 @@ Library Setup
 * Add the following dependencies to your projects build.gradle file
 
 ```
-	 compile (name:'mojilib-release',ext:'aar')
-	 compile 'com.android.support:recyclerview-v7:23.1.1'
-	 compile 'com.squareup.okhttp:okhttp:2.7.0'
-	 compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
-	 compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
-	 compile 'com.githang:viewpagerindicator:2.4.2@aar'
+	 compile 'com.makemoji:makemoji-sdk-android:0.9.5'
 ```
 
 
