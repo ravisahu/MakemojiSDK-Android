@@ -22,14 +22,18 @@ To obtain your SDK key please email: sdk@makemoji.com
 
 Library Setup
 ---------------------
-* Copy mojilib-release.aar to your projects 'libs' folder
 	* minSdkVersion 15
 	* targetSDKVersion 23
 
-* Add the following dependencies to your projects build.gradle file
+* Add the  to your projects build.gradle file
 
 ```
-	 compile 'com.makemoji:makemoji-sdk-android:0.9.5'
+dependencies {
+	compile 'com.makemoji:makemoji-sdk-android:0.9.5'
+}	 
+repositories {
+    jcenter()
+}
 ```
 
 
@@ -38,14 +42,16 @@ SDK Usage
 
 **Initialization**
 
-To start using the MakemojiSDK you will first have to add a few lines to your AppDelegate. 
+To start using the MakemojiSDK you will first have to add a few lines to your Application class. 
 
-Add the Makemoji header file to you App.java file.
+If you haven't already, declare an application class in your AndroidManifest.xml using it's fully qualified class name.
 
-```java
-import com.makemoji.mojilib.Moji;
+```xml
+    <application
+        android:name="com.makemoji.sbaar.mojilist.App"
+        ...
 ```
-Then onCreate, setup your SDK key.
+Then in App.java onCreate, setup your SDK key.
 
 ```java
 	public void onCreate(){
@@ -59,7 +65,7 @@ Then onCreate, setup your SDK key.
 
 **Setup a the Makemoji TextInput**
 
-First you will want to add the component to your activity content layout
+First you will want to add the component to your activity content layout. You can change the colors and drawables by specifying a style inheriting from MojiInputLayoutDefaultStyle.
 
 ```xml
 <com.makemoji.mojilib.MojiInputLayout
@@ -86,7 +92,7 @@ The SendLayoutClickListener will be called when a user clicks on the send button
             @Override
             public boolean onClick(String html, Spanned spanned) {
                 // send html to backend, display message
-                return true;
+                return true;//true to clear the field, false to keep it
             }
         });
 
@@ -126,6 +132,30 @@ To handle the display of a webpage when tapping on a Hypermoji ( a emoji with a 
 
 We have included a optimized ListAdapter for displaying HTML messages (MAdapater). It is recommended to use this as a starting point to building your own message display. 
 
+**Proguard Setup**
+
+If you need to use proguard when signing your app, add the following to your proguard-rules.pro file
+```
+-keep class com.makemoji.** { *; }
+-keep class com.retrofit2.** { *; }
+-keep class com.viewpagerindicator.** { *; }
+-keep class org.ccil.** { *; }
+-keep class com.squareup.** { *; }
+
+-keep interface com.squareup.okhttp.** { *; }
+-dontwarn com.squareup.okhttp.**
+-dontwarn okio.**
+-dontwarn retrofit2.**
+-dontwarn com.viewpagerindicator.**
+-dontwarn rx.**
+
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+
+-keepattributes Signature
+-keepattributes Exceptions
+```
 
 
 FAQ

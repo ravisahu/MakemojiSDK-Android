@@ -4,18 +4,13 @@
     tools:context="com.makemoji.sbaar.mojilist.MainActivity">
 
     <item
-        android:id="@+id/action_size_up"
+        android:id="@+id/action_attach"
         android:orderInCategory="100"
-        android:title="@string/action_text_up"
+        android:title="Attatch EditText"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_size_down"
+        android:id="@+id/action_detach"
         android:orderInCategory="100"
-        android:title="@string/action_text_down"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_toggle_simple"
-        android:orderInCategory="100"
-        android:title="@string/action_toggle_simple"
+        android:title="Detach EditText"
         app:showAsAction="never" />
 </menu>
