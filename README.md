@@ -29,7 +29,11 @@ Library Setup
 
 ```
 dependencies {
+<<<<<<< HEAD
 	compile 'com.makemoji:makemoji-sdk-android:0.9.52
+=======
+	compile 'com.makemoji:makemoji-sdk-android:0.9.51'
+>>>>>>> 85d18947b41f1c05719f9aaeb1e1beb9b6e82990
 }	 
 repositories {
     jcenter()
@@ -128,7 +132,7 @@ To handle the display of a webpage when tapping on a Hypermoji ( a emoji with a 
 
 **Displaying Messages**
 
-We have included a optimized ListAdapter for displaying HTML messages and customizing HyperMoji click action (MAdapater) . It is recommended to use this as a starting point to building your own message display.  Take note of how it uses Moji class methods to set text  and how to set a HyperMojiListener on an individual TextView.
+We have included a optimized ListView Adapter for displaying HTML messages and customizing HyperMoji click action (MAdapater) . It is recommended to use this as a starting point to building your own message display.  Take note of how it uses Moji class methods to set text  and how to set a HyperMojiListener on an individual TextView.
 
 **Proguard Setup**
 
