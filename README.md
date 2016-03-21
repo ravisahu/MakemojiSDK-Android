@@ -22,14 +22,14 @@ To obtain your SDK key please email: sdk@makemoji.com
 
 Library Setup
 ---------------------
-	* minSdkVersion 15
+	* minSdkVersion 14
 	* targetSDKVersion 23
 
-* Add the  to your projects build.gradle file
+* Add this to your projects build.gradle file
 
 ```
 dependencies {
-	compile 'com.makemoji:makemoji-sdk-android:0.9.5'
+	compile 'com.makemoji:makemoji-sdk-android:0.9.52
 }	 
 repositories {
     jcenter()
@@ -56,16 +56,15 @@ Then in App.java onCreate, setup your SDK key.
 ```java
 	public void onCreate(){
         super.onCreate();
-        context=this;
         Moji.initialize(this,"YOUR_KEY_HERE");
     }
 
 ```
 
 
-**Setup a the Makemoji TextInput**
+**Setup the Makemoji TextInput**
 
-First you will want to add the component to your activity content layout. You can change the colors and drawables by specifying a style inheriting from MojiInputLayoutDefaultStyle.
+First you will want to add the component to your activity content layout. You can change the colors and drawables and layout for the 'Send' button by specifying a style inheriting from MojiInputLayoutDefaultStyle.
 
 ```xml
 <com.makemoji.mojilib.MojiInputLayout
@@ -80,7 +79,6 @@ In your activity during onCreate, find the view you added in your layout, and as
 
 ```java
 	MojiInputLayout mojiInputLayout = (MojiInputLayout)findViewById(R.id.mojiInput);
-	final MAdapter mAdapter = new MAdapter(this,new ArrayList<MojiMessage>(),true);
 ```
 
 **Send a Message**
@@ -116,7 +114,7 @@ The CameraButtonClickListener is called when a user taps on the camera button in
 **Hypermoji - Emoji with a URL**
 
 
-To handle the display of a webpage when tapping on a Hypermoji ( a emoji with a URL link), use the HyperMojiClickListener callback
+To handle the display of a webpage when tapping on a Hypermoji ( a emoji with a URL link), use the HyperMojiClickListener callback. 
 
 ```java
         mojiInputLayout.setHyperMojiClickListener(new HyperMojiListener() {
@@ -130,7 +128,7 @@ To handle the display of a webpage when tapping on a Hypermoji ( a emoji with a 
 
 **Displaying Messages**
 
-We have included a optimized ListAdapter for displaying HTML messages (MAdapater). It is recommended to use this as a starting point to building your own message display. 
+We have included a optimized ListAdapter for displaying HTML messages and customizing HyperMoji click action (MAdapater) . It is recommended to use this as a starting point to building your own message display.  Take note of how it uses Moji class methods to set text  and how to set a HyperMojiListener on an individual TextView.
 
 **Proguard Setup**
 
@@ -173,7 +171,7 @@ FAQ
 
 *	Messages are composed of simple HTML containing image and paragraph tags. Formatting is presented as inline CSS.
 
-*  All network operations happen asyncronously and do not block the User Interface
+*  All network operations happen asynchronously and do not block the User Interface
 
 Service Performance
 ---------------------
