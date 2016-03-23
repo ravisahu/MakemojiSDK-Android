@@ -134,6 +134,27 @@ To handle the display of a webpage when tapping on a Hypermoji ( a emoji with a 
 
 We have included a optimized ListView Adapter for displaying HTML messages and customizing HyperMoji click action (MAdapater) . It is recommended to use this as a starting point to building your own message display.  Take note of how it uses Moji class methods to set text  and how to set a HyperMojiListener on an individual TextView.
 
+**Detatched Input**
+
+To hide the built in Edit Text and use your own that is somewhere else on the screen as the input target, call attatchMojiEditText(MojiEditText outsideMojiEdit) on the MojiInputLayout. Call detachMojiEditText() to restore the default behavior. Note that attatchMojiEditText requires an EditText that is an intanceof MojiEditText to ensure keyboard compatibility and correct copy paste functionality.
+```java
+            mojiInputLayout.attatchMojiEditText(outsideMojiEdit);
+            outsideMojiEdit.setVisibility(View.VISIBLE);
+            outsideMojiEdit.requestFocus();
+```
+
+**Plain Text Converter**
+
+If you need to convert an html message to a platform that does not support MakeMoji, you can use the plain text converter to produce a message with a human-friendly reading that converts emojis into the form [flashtagname.base62emojiid hypermojiurl]. For example, "Aliens are real [alien.gG iwanttobelieve.com]." It is reccommended to store the html of the message as the cannonical version, but you can also convert from plain text back to html if needed.
+```java
+        mojiInputLayout.setSendLayoutClickListener(new MojiInputLayout.SendClickListener() {
+            @Override
+            public boolean onClick(String html, Spanned spanned) {
+                    String plainText = Moji.htmlToPlainText(html);
+                    String htmlFromPlain = Moji.plainTextToHtml(plainText);
+                    }});
+```
+
 **Proguard Setup**
 
 If you need to use proguard when signing your app, add the following to your proguard-rules.pro file
