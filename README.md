@@ -29,11 +29,9 @@ Library Setup
 
 ```
 dependencies {
-<<<<<<< HEAD
+
 	compile 'com.makemoji:makemoji-sdk-android:0.9.52
-=======
-	compile 'com.makemoji:makemoji-sdk-android:0.9.51'
->>>>>>> 85d18947b41f1c05719f9aaeb1e1beb9b6e82990
+
 }	 
 repositories {
     jcenter()
