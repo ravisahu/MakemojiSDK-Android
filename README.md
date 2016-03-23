@@ -141,6 +141,8 @@ To hide the built in Edit Text and use your own that is somewhere else on the sc
             mojiInputLayout.attatchMojiEditText(outsideMojiEdit);
             outsideMojiEdit.setVisibility(View.VISIBLE);
             outsideMojiEdit.requestFocus();
+            ...
+            String html = Moji.toHtml(outsideMojiEdit.getText());//to get input as html
 ```
 
 **Plain Text Converter**
