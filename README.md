@@ -22,7 +22,7 @@ To obtain your SDK key please email: sdk@makemoji.com
 
 Library Setup
 ---------------------
-	* minSdkVersion 14
+	* minSdkVersion 15
 	* targetSDKVersion 23
 
 * Add this to your projects build.gradle file
