@@ -30,7 +30,7 @@ Library Setup
 ```
 dependencies {
 
-	compile 'com.makemoji:makemoji-sdk-android:0.9.52
+	compile 'com.makemoji:makemoji-sdk-android:0.9.53
 
 }	 
 repositories {
