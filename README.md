@@ -155,7 +155,7 @@ If you need to convert an html message to a platform that does not support MakeM
                     }});
 ```
 
-** (Optional) Include the Third Party Keyboard IME!**
+**(Optional) Include the Third Party Keyboard IME!**
 
 You can package the MakeMoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in.
 Add the third party keyboard to your dependencies.
