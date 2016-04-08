@@ -30,7 +30,7 @@ Library Setup
 ```
 dependencies {
 
-	compile 'com.makemoji:makemoji-sdk-android:0.9.54
+	compile 'com.makemoji:makemoji-sdk-android:0.9.55
 
 }	 
 repositories {
@@ -153,6 +153,25 @@ If you need to convert an html message to a platform that does not support MakeM
                     String plainText = Moji.htmlToPlainText(html);
                     String htmlFromPlain = Moji.plainTextToHtml(plainText);
                     }});
+```
+
+** (Optional) Include the Third Party Keyboard IME!**
+
+You can package the MakeMoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in.
+Add the third party keyboard to your dependencies.
+```
+compile 'com.makemoji:makemoji-3pk-android:0.9.55
+```
+In strings.xml, set the provider authority for te keyboards' content provider based on your unique package name, add the keyboard name as it will appear to the user and the class name of the keyboard's settings activity. Make sure to prompt the user to activate the keyboard after installation using code similar to ActivateActivity, or the keyboard won't show up as an option.
+**If you are publishing multiple apps, each provider authority must be unique**  or there will be installation problems!
+```xml
+    <string name="_mm_provider_authority">com.makemoji.keyboard.fileprovider</string>
+    <string name="_mm_kb_label">MakeMoji Keyboard (Sample App)</string>
+    <string name="_mm_kb_settings_activity">com.makemoji.sbaar.mojilist.ActivateActivity</string>
+```
+In your application class, set the message that will appear when "share keyboard" is clicked, or null to hide the option.
+```java
+    MMKB.setShareMessage("link to your app goes here");
 ```
 
 **Proguard Setup**
