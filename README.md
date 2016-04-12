@@ -170,7 +170,7 @@ In strings.xml, set the provider authority for the keyboards' content provider b
 ```xml
     <string name="_mm_provider_authority">com.makemoji.keyboard.fileprovider</string>
     <string name="_mm_kb_label">MakeMoji Keyboard (Sample App)</string>
-    <string name="_mm_kb_share_message_">MakeMoji Keyboard (Sample App)</string> <!-- share button invisible if empty -->
+    <string name="_mm_kb_share_message">MakeMoji Keyboard (Sample App)</string> <!-- share button invisible if empty -->
     <string name="_mm_kb_settings_activity">com.makemoji.sbaar.mojilist.ActivateActivity</string>
 ```
 
