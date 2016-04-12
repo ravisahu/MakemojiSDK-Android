@@ -3,7 +3,6 @@ package com.makemoji.sbaar.mojilist;
 import android.app.Application;
 import android.content.Context;
 
-import com.makemoji.keyboard.MMKB;
 import com.makemoji.mojilib.Moji;
 
 /**
@@ -16,7 +15,6 @@ public class App extends Application {
         super.onCreate();
         context=this;
         Moji.initialize(this,"YOUR-SDK-KEY-HERE");
-        MMKB.setShareMessage("link to your app goes here");
         //LeakCanary.install(this);
     }
 }
