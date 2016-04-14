@@ -30,7 +30,7 @@ Library Setup
 ```
 dependencies {
 
-	compile 'com.makemoji:makemoji-sdk-android:0.9.59'
+	compile 'com.makemoji:makemoji-sdk-android:0.9.60'
 
 }	 
 repositories {
@@ -69,7 +69,7 @@ Then in App.java onCreate, setup your SDK key.
 
 **Setup the Makemoji TextInput**
 
-First you will want to add the component to your activity content layout. You can change the colors and drawables and layout for the 'Send' button by specifying a style inheriting from MojiInputLayoutDefaultStyle.
+First you will want to add the component to your activity content layout. You can change the colors and drawables and layout for the 'Send' button by specifying a style inheriting from MojiInputLayoutDefaultStyle in styles.xml.
 
 ```xml
 <com.makemoji.mojilib.MojiInputLayout
@@ -88,7 +88,7 @@ In your activity during onCreate, find the view you added in your layout, and as
 
 **Send a Message**
 
-The SendLayoutClickListener will be called when a user clicks on the send button in the text input. This should be set in onCreate
+The SendLayoutClickListener will be called when a user clicks on the send button in the text input. This should be set in onCreate.
 
 ```java
         mojiInputLayout.setSendLayoutClickListener(new MojiInputLayout.SendClickListener() {
@@ -119,7 +119,7 @@ The CameraButtonClickListener is called when a user taps on the camera button in
 **Hypermoji - Emoji with a URL**
 
 
-To handle the display of a webpage when tapping on a Hypermoji ( a emoji with a URL link), use the HyperMojiClickListener callback. 
+To handle the display of a webpage when tapping on a Hypermoji ( an emoji with a URL link), use the HyperMojiClickListener callback. 
 
 ```java
         mojiInputLayout.setHyperMojiClickListener(new HyperMojiListener() {
@@ -137,18 +137,19 @@ We have included a optimized ListView Adapter for displaying HTML messages and c
 
 **Detatched Input**
 
-To hide the built in Edit Text and use your own that is somewhere else on the screen as the input target, call attatchMojiEditText(MojiEditText outsideMojiEdit) on the MojiInputLayout. Call detachMojiEditText() to restore the default behavior. Note that attatchMojiEditText requires an EditText that is an intanceof MojiEditText to ensure keyboard compatibility and correct copy paste functionality.
+To hide the built in Edit Text and use your own that is somewhere else on the screen as the input target, call attatchMojiEditText(MojiEditText outsideMojiEdit) on the MojiInputLayout. Call detachMojiEditText() to restore the default behavior. Note that attatchMojiEditText requires an EditText that is an instanceof MojiEditText to ensure keyboard compatibility and correct copy paste functionality.
 ```java
             mojiInputLayout.attatchMojiEditText(outsideMojiEdit);
             outsideMojiEdit.setVisibility(View.VISIBLE);
             outsideMojiEdit.requestFocus();
             ...
             String html = Moji.toHtml(outsideMojiEdit.getText());//to get input as html
+            mojiInputLayout.manualSaveInputToRecentsAndBackend();//to send message to analytics console and emojis to user's recent list
 ```
 
 **Plain Text Converter**
 
-If you need to convert an html message to a platform that does not support Makemoji, you can use the plain text converter to produce a message with a human-friendly reading that converts emojis into the form [flashtagname.base62emojiid hypermojiurl]. For example, "Aliens are real [alien.gG iwanttobelieve.com]." It is reccommended to store the html of the message as the cannonical version, but you can also convert from plain text back to html if needed.
+If you need to convert an html message to a platform that does not support Makemoji, you can use the plain text converter to produce a message with a human-friendly reading that converts emojis into the form [flashtagname.base62emojiid hypermojiurl]. For example, "Aliens are real [alien.gG iwanttobelieve.com]." It is recommended to store the html of the message as the canonical version, but you can also convert from plain text back to html if needed.
 ```java
         mojiInputLayout.setSendLayoutClickListener(new MojiInputLayout.SendClickListener() {
             @Override
@@ -160,10 +161,10 @@ If you need to convert an html message to a platform that does not support Makem
 
 **(Optional) Include the Third Party Keyboard IME!**
 
-You can package the Makemoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in.
+You can package the Makemoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in. Selecting an emoji here will cause the keyboard to launch a picture share intent to the current app, or copy the image url to the clipboard if there is no matching intent filter in the app manifest.
 Add the third party keyboard to your dependencies.
 ```
-compile 'com.makemoji:makemoji-3pk-android:0.9.59'
+compile 'com.makemoji:makemoji-3pk-android:0.9.60'
 ```
 In strings.xml, set the provider authority for the keyboards' content provider based on your unique package name, add the keyboard name as it will appear to the user and the class name of the keyboard's settings activity. Make sure to prompt the user to activate the keyboard after installation using code similar to ActivateActivity, or the keyboard won't show up as an option.
 **If you are publishing multiple apps, each provider authority must be unique**  or there will be installation problems!
