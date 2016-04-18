@@ -30,7 +30,7 @@ Library Setup
 ```
 dependencies {
 
-	compile 'com.makemoji:makemoji-sdk-android:0.9.62'
+	compile 'com.makemoji:makemoji-sdk-android:0.9.63'
 
 }	 
 repositories {
@@ -159,12 +159,47 @@ If you need to convert an html message to a platform that does not support Makem
                     }});
 ```
 
+**Emoji Wall Selection Activity**
+The Emoji Wall is an activity that allows your users to select one emoji from the Makemoji library or the built in Android emoji. Declare it in your manifest to launch it.
+```xml
+        <activity
+            android:name="com.makemoji.mojilib.wall.MojiWallActivity"
+            android:label="Emoji Wall Activity">
+        </activity>
+```
+```java
+            Intent intent = new Intent(this, MojiWallActivity.class);
+            //intent.putExtra(MojiWallActivity.EXTRA_THEME,R.style.MojiWallDefaultStyle_Light); //to theme it
+            startActivityForResult(intent,IMojiSelected.REQUEST_MOJI_MODEL);
+```
+The result is returned as a json string that can be converted into a MojiModel containing the name, image url, and unicode character, if applicable.
+```java
+     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+         super.onActivityResult(requestCode,resultCode,data);
+         if (requestCode == IMojiSelected.REQUEST_MOJI_MODEL && resultCode== RESULT_OK){
+             try{
+                 String json = data.getStringExtra(Moji.EXTRA_JSON);
+                 MojiModel model = MojiModel.fromJson(new JSONObject(json));
+             }
+             catch (Exception e){
+                 e.printStackTrace();
+             }
+         }
+     }
+```   
+To theme the activity, pass the activity theme as an extra when starting the activity. Make sure it extends from AppCompat and includes the following attributes.
+```xml
+        <item name="_mm_wall_tab_layout">@layout/mm_wall_tab</item>
+        <item name="_mm_wall_header_layout">@layout/mm_wall_header</item>
+        <item name="_mm_wall_tabs_bg">@android:color/black</item>
+        <item name="_mm_wall_pager_bg">@color/_mm_grey_900</item>
+```
 **(Optional) Include the Third Party Keyboard IME!**
 
 You can package the Makemoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in. Selecting an emoji here will cause the keyboard to launch a picture share intent to the current app, or copy the image url to the clipboard if there is no matching intent filter in the app manifest.
 Add the third party keyboard to your dependencies.
 ```
-compile 'com.makemoji:makemoji-3pk-android:0.9.62'
+compile 'com.makemoji:makemoji-3pk-android:0.9.63'
 ```
 In strings.xml, set the provider authority for the keyboards' content provider based on your unique package name, add the keyboard name as it will appear to the user and the class name of the keyboard's settings activity. Make sure to prompt the user to activate the keyboard after installation using code similar to ActivateActivity, or the keyboard won't show up as an option.
 **If you are publishing multiple apps, each provider authority must be unique**  or there will be installation problems!

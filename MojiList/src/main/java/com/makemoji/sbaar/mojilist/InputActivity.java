@@ -1,9 +1,9 @@
 package com.makemoji.sbaar.mojilist;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spanned;
@@ -11,18 +11,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.makemoji.mojilib.HyperMojiListener;
+import com.makemoji.mojilib.IMojiSelected;
 import com.makemoji.mojilib.Moji;
 import com.makemoji.mojilib.MojiEditText;
 import com.makemoji.mojilib.MojiInputLayout;
+import com.makemoji.mojilib.model.MojiModel;
+import com.makemoji.mojilib.wall.MojiWallActivity;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class InputActivity extends AppCompatActivity {
+public class InputActivity extends AppCompatActivity{
     MojiEditText outsideMojiEdit;
     MojiInputLayout mojiInputLayout;
     boolean plainTextConversion = false;
@@ -53,7 +57,6 @@ public class InputActivity extends AppCompatActivity {
                     MojiMessage message3 = new MojiMessage(htmlFromPlain);
                     mAdapter.add(message2);
                     mAdapter.add(message3);
-                    mAdapter.add(mojiMessage);
                 }
                 return true;
             }
@@ -104,12 +107,17 @@ public class InputActivity extends AppCompatActivity {
         else if (id == R.id.action_kb_activate){
             startActivity(new Intent(this,ActivateActivity.class));
         }
+        else if (id == R.id.action_emoji_wall_activity){
+            Intent intent = new Intent(this, MojiWallActivity.class);
+            //intent.putExtra(MojiWallActivity.EXTRA_THEME,R.style.MojiWallDefaultStyle_Light); //to theme it
+            startActivityForResult(intent,IMojiSelected.REQUEST_MOJI_MODEL);
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
     /**
-     * Handle intents coming from the makemoji keyboard to add them as inline emojis rather than just a picture.
+     * Handle intents coming from the makemoji mm_keyboard to add them as inline emojis rather than just a picture.
      * If the mojiinputlayout does not handle the intent, the handle it yourself by extracting the image for example.
      * Make sure to have your activity launch mode be singleTop if possible! The incoming intent has to come with the NEW_TASK
      * flag because it is not coming from an activity, but that can be overridden with launchMode="singleTop" in the manifest
@@ -120,4 +128,24 @@ public class InputActivity extends AppCompatActivity {
         super.onNewIntent(i);
         boolean wasMMIntent = mojiInputLayout.handleIntent(i);
     }
+
+
+    //get the result from emoji wall activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        //mojiInputLayout.handleIntent(data);
+        //OR
+        if (requestCode == IMojiSelected.REQUEST_MOJI_MODEL && resultCode== RESULT_OK){
+            try{
+                String json = data.getStringExtra(Moji.EXTRA_JSON);
+                MojiModel model = MojiModel.fromJson(new JSONObject(json));
+                mojiInputLayout.addMojiModel(model,null);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

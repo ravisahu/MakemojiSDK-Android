@@ -23,4 +23,9 @@
         android:orderInCategory="100"
         android:title="Activate Keyboard"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_emoji_wall_activity"
+        android:orderInCategory="100"
+        android:title="Emoji Wall Activity"
+        app:showAsAction="never" />
 </menu>
