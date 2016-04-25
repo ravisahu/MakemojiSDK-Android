@@ -30,7 +30,7 @@ Library Setup
 ```
 dependencies {
 
-	compile 'com.makemoji:makemoji-sdk-android:0.9.63'
+	compile 'com.makemoji:makemoji-sdk-android:0.9.68'
 
 }	 
 repositories {
@@ -56,12 +56,13 @@ If you haven't already, declare an application class in your AndroidManifest.xml
         android:name="com.makemoji.sbaar.mojilist.App"
         ...
 ```
-Then in App.java onCreate, setup your SDK key.
+Then in App.java onCreate, setup your SDK key. Use the [Google Advertising ID](http://developer.android.com/google/play-services/id.html#example) if you're using Makemoji for advertising and distributing to the Play Store.
 
 ```java
 	public void onCreate(){
         super.onCreate();
         Moji.initialize(this,"YOUR_KEY_HERE");
+        //Moji.setUserId("Google ad id here if needed"); // optional custom user id for analytics
     }
 
 ```
@@ -133,11 +134,11 @@ To handle the display of a webpage when tapping on a Hypermoji ( an emoji with a
 
 **Displaying Messages**
 
-We have included a optimized ListView Adapter for displaying HTML messages and customizing HyperMoji click action (MAdapater) . It is recommended to use this as a starting point to building your own message display.  Take note of how it uses Moji class methods to set text  and how to set a HyperMojiListener on an individual TextView.
+We have included an optimized ListView Adapter for displaying HTML messages and customizing HyperMoji click action (MAdapater) . It is recommended to use this as a starting point to building your own message display.  Take note of how it uses Moji class methods to set text  and how to set a HyperMojiListener on an individual TextView.
 
 **Detatched Input**
 
-To hide the built in Edit Text and use your own that is somewhere else on the screen as the input target, call attatchMojiEditText(MojiEditText outsideMojiEdit) on the MojiInputLayout. Call detachMojiEditText() to restore the default behavior. Note that attatchMojiEditText requires an EditText that is an instanceof MojiEditText to ensure keyboard compatibility and correct copy paste functionality.
+To hide the built in Edit Text and use your own that is somewhere else on the screen as the input target, call attatchMojiEditText(MojiEditText outsideMojiEdit) on the MojiInputLayout. Call detachMojiEditText() to restore the default behavior. Note that attatchMojiEditText requires an EditText that is an instance of MojiEditText to ensure keyboard compatibility and correct copy paste functionality.
 ```java
             mojiInputLayout.attatchMojiEditText(outsideMojiEdit);
             outsideMojiEdit.setVisibility(View.VISIBLE);
@@ -160,7 +161,8 @@ If you need to convert an html message to a platform that does not support Makem
 ```
 
 **Emoji Wall Selection Activity**
-The Emoji Wall is an activity that allows your users to select one emoji from the Makemoji library or the built in Android emoji. Declare it in your manifest to launch it.
+
+The Emoji Wall is an activity that allows your users to select one emoji from the Makemoji library or the built in Android emoji. Declare it in your manifest to launch it. Alternatively, you can host the MojiWallFragment in your own activity that implements IMojiSelected.
 ```xml
         <activity
             android:name="com.makemoji.mojilib.wall.MojiWallActivity"
@@ -170,6 +172,8 @@ The Emoji Wall is an activity that allows your users to select one emoji from th
 ```java
             Intent intent = new Intent(this, MojiWallActivity.class);
             //intent.putExtra(MojiWallActivity.EXTRA_THEME,R.style.MojiWallDefaultStyle_Light); //to theme it
+            intent.putExtra(MojiWallActivity.EXTRA_SHOWRECENT,true);//show recently used emojis as a tab
+            intent.putExtra(MojiWallActivity.EXTRA_SHOWUNICODE,true);//show unicode emojis as a tab
             startActivityForResult(intent,IMojiSelected.REQUEST_MOJI_MODEL);
 ```
 The result is returned as a json string that can be converted into a MojiModel containing the name, image url, and unicode character, if applicable.
@@ -196,20 +200,25 @@ To theme the activity, pass the activity theme as an extra when starting the act
 ```
 **(Optional) Include the Third Party Keyboard IME!**
 
-You can package the Makemoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in. Selecting an emoji here will cause the keyboard to launch a picture share intent to the current app, or copy the image url to the clipboard if there is no matching intent filter in the app manifest.
+You can package the Makemoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in. Selecting an emoji here will cause the keyboard to launch a picture share intent to the current app, or copy the image url to the clipboard if there is no matching intent filter in the current app manifest.
 Add the third party keyboard to your dependencies.
 ```
-compile 'com.makemoji:makemoji-3pk-android:0.9.63'
+compile 'com.makemoji:makemoji-3pk-android:0.9.68'
 ```
 In strings.xml, set the provider authority for the keyboards' content provider based on your unique package name, add the keyboard name as it will appear to the user and the class name of the keyboard's settings activity. Make sure to prompt the user to activate the keyboard after installation using code similar to ActivateActivity, or the keyboard won't show up as an option.
 **If you are publishing multiple apps, each provider authority must be unique**  or there will be installation problems!
 ```xml
+    <!-- strings.xml -->
     <string name="_mm_provider_authority">com.makemoji.keyboard.fileprovider</string>
     <string name="_mm_kb_label">MakeMoji Keyboard (Sample App)</string>
     <string name="_mm_kb_share_message">MakeMoji Keyboard (Sample App)</string> <!-- share button invisible if empty -->
     <string name="_mm_kb_settings_activity">com.makemoji.sbaar.mojilist.ActivateActivity</string>
 ```
-
+```xml
+    <!-- colors.xml -->
+    <color name="mmKBPageTitleColor">@color/colorPrimary</color>
+    <color name="mmKBIconColor">@color/colorPrimary</color>
+```
 
 **Proguard Setup**
 

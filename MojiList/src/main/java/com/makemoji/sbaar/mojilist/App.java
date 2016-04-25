@@ -16,6 +16,7 @@ public class App extends Application {
         super.onCreate();
         context=this;
         Moji.initialize(this,"YOUR-SDK-KEY-HERE");
+        Moji.setUserId("Google ad id here if needed");
         LeakCanary.install(this);
     }
 }
