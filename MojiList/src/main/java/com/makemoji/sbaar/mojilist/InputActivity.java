@@ -1,5 +1,6 @@
 package com.makemoji.sbaar.mojilist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -11,20 +12,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.makemoji.keyboard.MMKB;
 import com.makemoji.mojilib.HyperMojiListener;
 import com.makemoji.mojilib.IMojiSelected;
 import com.makemoji.mojilib.Moji;
 import com.makemoji.mojilib.MojiEditText;
 import com.makemoji.mojilib.MojiInputLayout;
+import com.makemoji.mojilib.MojiUnlock;
 import com.makemoji.mojilib.model.MojiModel;
 import com.makemoji.mojilib.wall.MojiWallActivity;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class InputActivity extends AppCompatActivity{
     MojiEditText outsideMojiEdit;
@@ -73,6 +78,12 @@ public class InputActivity extends AppCompatActivity{
                 Toast.makeText(InputActivity.this,"hypermoji clicked from input activity",Toast.LENGTH_SHORT).show();
             }
         });
+        mojiInputLayout.setLockedCategoryClicked(new MojiUnlock.ILockedCategoryClicked() {
+            @Override
+            public void onClick(String name) {
+                lockedCategoryClick(name);
+            }
+        });
 
 
     }
@@ -114,6 +125,10 @@ public class InputActivity extends AppCompatActivity{
             intent.putExtra(MojiWallActivity.EXTRA_SHOWUNICODE,true);
             startActivityForResult(intent,IMojiSelected.REQUEST_MOJI_MODEL);
         }
+        else if (id == R.id.action_clear_unlocks){
+            MojiUnlock.clearGroups();
+            mojiInputLayout.refreshCategories();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -128,9 +143,18 @@ public class InputActivity extends AppCompatActivity{
     @Override
     public void onNewIntent(Intent i){
         super.onNewIntent(i);
-        boolean wasMMIntent = mojiInputLayout.handleIntent(i);
+        if (mojiInputLayout.handleIntent(i))
+            return;
+        if (Moji.ACTION_LOCKED_CATEGORY_CLICK.equals(i.getAction())){
+            lockedCategoryClick(i.getStringExtra(Moji.EXTRA_CATEGORY_NAME));
+        }
     }
 
+    public void lockedCategoryClick(String name){
+        MojiUnlock.unlockCategory(name);
+        mojiInputLayout.refreshCategories();
+
+    }
 
     //get the result from emoji wall activity
     @Override
@@ -149,5 +173,6 @@ public class InputActivity extends AppCompatActivity{
             }
         }
     }
+
 
 }

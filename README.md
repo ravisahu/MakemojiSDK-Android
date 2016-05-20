@@ -219,7 +219,7 @@ To theme the activity, pass the activity theme as an extra when starting the act
 You can package the Makemoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in. Selecting an emoji here will cause the keyboard to launch a picture share intent to the current app, or copy the image url to the clipboard if there is no matching intent filter in the current app manifest.
 Add the third party keyboard to your dependencies.
 ```
-compile 'com.makemoji:makemoji-3pk-android:0.9.699'
+compile 'com.makemoji:makemoji-3pk-android:0.9.700'
 ```
 In strings.xml, set the provider authority for the keyboards' content provider based on your unique package name, add the keyboard name as it will appear to the user and the class name of the keyboard's settings activity. Make sure to prompt the user to activate the keyboard after installation using code similar to ActivateActivity, or the keyboard won't show up as an option.
 **If you are publishing multiple apps, each provider authority must be unique**  or there will be installation problems!
@@ -243,6 +243,27 @@ In strings.xml, set the provider authority for the keyboards' content provider b
     <bool name="mmUseSpanSizeFor3pkImages">false</bool>
 ```
 If you want the ability to customize some other aspect of the sdk or 3pk, just ask.
+
+**(Optional) Control Locked Categories**
+If you choose to lock some of your categories, you can control which are unlocked for the device by using the MojiUnlock class. To listen for when a user clicks a locked category in the MojiInpuLayout, set a listener.
+```java
+        mojiInputLayout.setLockedCategoryClicked(new MojiUnlock.ILockedCategoryClicked() {
+            @Override
+            public void onClick(String name) {
+                MojiUnlock.unlockCategory(name);
+                mojiInputLayout.refreshCategories();
+            }
+        });
+```
+If you are using the third party keyboard, add an intent filter to the activity that will be launched when a locked category is clicked on the keyboard.
+```xml
+        <intent-filter>
+            <action android:name="com.makemoji.mojilib.action.LOCKED_CATEGORY_CLICKED"/>
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+```
+Handle the intent with this action in both onCreate and onNewIntent and check 
+
 
 **Proguard Setup**
 
