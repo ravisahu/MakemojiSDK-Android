@@ -30,7 +30,7 @@ Library Setup
 ```
 dependencies {
 
-	compile 'com.makemoji:makemoji-sdk-android:0.9.700'
+	compile 'com.makemoji:makemoji-sdk-android:0.9.701'
 
 }	 
 repositories {
@@ -59,7 +59,7 @@ If you haven't already, declare an application class in your AndroidManifest.xml
 Then in App.java onCreate, setup your SDK key. Use the [Google Advertising ID](http://developer.android.com/google/play-services/id.html#example) if you're using Makemoji for advertising and distributing to the Play Store.
 
 ```java
-	public void onCreate(){
+    public void onCreate(){
         super.onCreate();
         Moji.initialize(this,"YOUR_KEY_HERE");
         //Moji.setUserId("Google ad id here if needed"); // optional custom user id for analytics
@@ -81,10 +81,24 @@ First you will want to add the component to your activity content layout. Check 
 
 ```
 
-In your activity during onCreate, find the view you added in your layout, and assign this to a variable.
+In your activity during onCreate, find the view you added in your layout, and have it handle the back button when it is expanded.
 
 ```java
-	MojiInputLayout mojiInputLayout = (MojiInputLayout)findViewById(R.id.mojiInput);
+    MojiInputLayout mojiInputLayout;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mojiInputLayout = (MojiInputLayout)findViewById(R.id.mojiInput);
+    }
+	
+    @Override
+    public void onBackPressed(){
+        if (mojiInputLayout.canHandleBack()){
+            mojiInputLayout.onBackPressed();
+            return;
+        }
+        super.onBackPressed();
+    }
 ```
 
 **Send a Message**
@@ -176,7 +190,7 @@ If you need to convert an html message to a platform that does not support Makem
                     }});
 ```
 
-**Emoji Wall Selection Activity**
+**(Optional) Emoji Wall Selection Activity**
 
 The Emoji Wall is an activity that allows your users to select one emoji from the Makemoji library or the built in Android emoji. Declare it in your manifest to launch it. Alternatively, you can host the MojiWallFragment in your own activity that implements IMojiSelected.
 ```xml
@@ -219,7 +233,7 @@ To theme the activity, pass the activity theme as an extra when starting the act
 You can package the Makemoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in. Selecting an emoji here will cause the keyboard to launch a picture share intent to the current app, or copy the image url to the clipboard if there is no matching intent filter in the current app's manifest.
 Add the third party keyboard to your dependencies.
 ```
-compile 'com.makemoji:makemoji-3pk-android:0.9.700'
+compile 'com.makemoji:makemoji-3pk-android:0.9.701'
 ```
 In strings.xml, set the provider authority for the keyboards' content provider based on your unique package name, add the keyboard name as it will appear to the user and the class name of the keyboard's settings activity. Make sure to prompt the user to activate the keyboard after installation using code similar to ActivateActivity, or the keyboard won't show up as an option.
 **If you are publishing multiple apps, each provider authority must be unique**  or there will be installation problems!
