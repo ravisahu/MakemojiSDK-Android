@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         applicationId "com.makemoji.sbaar.mojilist"
@@ -28,8 +28,8 @@ dependencies {
 
     compile 'com.google.android.gms:play-services-ads:8.4.0'
 
-    compile 'com.makemoji:makemoji-sdk-android:0.9.702'
-    compile 'com.makemoji:makemoji-3pk-android:0.9.702'
+    compile 'com.makemoji:makemoji-sdk-android:0.9.703'
+    compile 'com.makemoji:makemoji-3pk-android:0.9.703'
 
 }
 
