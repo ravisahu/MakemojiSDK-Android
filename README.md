@@ -30,7 +30,7 @@ Library Setup
 ```
 dependencies {
 
-	compile 'com.makemoji:makemoji-sdk-android:0.9.714'
+	compile 'com.makemoji:makemoji-sdk-android:0.9.716'
 
 }	 
 repositories {
@@ -233,7 +233,7 @@ To theme the activity, pass the activity theme as an extra when starting the act
 You can package the Makemoji keyboard in your app so users can select it as a soft keyboard no matter what app they're in. Selecting an emoji here will cause the keyboard to launch a picture share intent to the current app, or copy the image url to the clipboard if there is no matching intent filter in the current app's manifest.
 Add the third party keyboard to your dependencies.
 ```
-compile 'com.makemoji:makemoji-3pk-android:0.9.714'
+compile 'com.makemoji:makemoji-3pk-android:0.9.716'
 ```
 In strings.xml, set the provider authority for the keyboards' content provider based on your unique package name, add the keyboard name as it will appear to the user and the class name of the keyboard's settings activity. Make sure to prompt the user to activate the keyboard after installation using code similar to ActivateActivity, or the keyboard won't show up as an option.
 **If you are publishing multiple apps, each provider authority must be unique**  or there will be installation problems!
@@ -301,6 +301,21 @@ If you are using the third party keyboard, add an intent filter to the activity 
 ```
 Handle the intent with action Moji.ACTION_LOCKED_CATEGORY_CLICK in both onCreate and onNewIntent and check extra Moji.EXTRA_CATEGORY_NAME for the category name that was clicked.
 Alternatively, you can set a completely custom behavior for the 3pk by using MMKB.setLockedListener(MMKB.ILockedCategorySelected listener)
+
+
+**(Optional) Emoji reactions**
+
+To include a horizontal view of emoji reactions for a piece of content, include a ReactionsLayout with a given height, like 30dp.
+Clicking the add button will open the MojiWallActivity, so declare it in your manifest.
+```xml
+    <com.makemoji.mojilib.ReactionsLayout
+        android:id="@+id/reactions_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+```
+You must set an id on each reaction layout, using reactionsLayout.setReactionsData(new ReactionData(id)); 
+Make sure to hold onto this data object if you wish to assign it to a view again,such as in an adapter.
+
 
 **Proguard Setup**
 
