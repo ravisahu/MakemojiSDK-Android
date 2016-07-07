@@ -18,7 +18,7 @@ public class App extends Application {
         context=this;
         Moji.initialize(this,"YOUR-SDK-KEY-HERE");
         //Moji.setUserId("Google ad id here if needed");
-        MMKB.setShareMessage("the message");
+        //MMKB.setShareMessage("the message");
         LeakCanary.install(this);
     }
 }
