@@ -306,15 +306,21 @@ Alternatively, you can set a completely custom behavior for the 3pk by using MMK
 **(Optional) Emoji reactions**
 
 To include a horizontal view of emoji reactions for a piece of content, include a ReactionsLayout with a given height, like 30dp.
-Clicking the add button will open the MojiWallActivity, so declare it in your manifest.
 ```xml
     <com.makemoji.mojilib.ReactionsLayout
         android:id="@+id/reactions_layout"
         android:layout_width="match_parent"
         android:layout_height="30dp"/>
 ```
-You must set an id on each reaction layout, using reactionsLayout.setReactionsData(new ReactionData(id)); 
-Make sure to hold onto this data object if you wish to assign it to a view again,such as in an adapter.
+You must set an id corresponding to a unique piece of your content on each reaction layout, using reactionsLayout.setReactionsData(new ReactionData(id)); Make sure to hold onto this data object if you wish to assign it to a view again, such as in a list adapter.
+
+Each ReactionsLayout has an 'add' button that will open the MojiWallActivity for the user to select one, so make sure to add it to your manifest as described above. To update the ReactionsLayout with the user selection, add the following in your onActivityResult.
+```java
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ReactionsData.onActivityResult(requestCode,resultCode,data);
+    }
+```
 
 
 **Proguard Setup**
