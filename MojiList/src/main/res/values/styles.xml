@@ -42,6 +42,7 @@
     _mm_leftContainerDrawable -> Drawable bg for button container left of emoji bar.
     _mm_showKbOnInflate -> Grab focus, show keyboard and cursor on input when view is inflated, or not.
     _mm_alwaysShowEmojiBar -> Always show emoji bar, or only when the keyboard is up.
+    _mm_minimumSendLength -> minimum characters to enter before the send layout is enabled.
 
     To styles the edit text, define a editTextStyle in a theme set the theme attribute in this view.
 
@@ -62,6 +63,7 @@
         <item name="_mm_leftContainerDrawable">@drawable/mm_left_page_gradient</item>
         <item name="_mm_showKbOnInflate">false</item>
         <item name="_mm_alwaysShowEmojiBar">false</item>
+        <item name="_mm_minimumSendLength">1</item>
 
     </style>
     <style name="MojiWallDefaultStyle.CustomDrawables">
