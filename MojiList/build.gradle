@@ -28,8 +28,8 @@ dependencies {
 
     compile 'com.google.android.gms:play-services-ads:9.4.0'
 
-    compile 'com.makemoji:makemoji-sdk-android:0.9.726'
-    compile 'com.makemoji:makemoji-3pk-android:0.9.726'
+    compile 'com.makemoji:makemoji-sdk-android:0.9.727'
+    compile 'com.makemoji:makemoji-3pk-android:0.9.727'
 
 }
 
