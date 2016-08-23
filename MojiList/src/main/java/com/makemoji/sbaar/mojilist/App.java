@@ -20,6 +20,6 @@ public class App extends Application {
         //Moji.setChannel("Channel1");
         //Moji.setUserId("Google ad id here if needed");
         //MMKB.setShareMessage("the message");
-        LeakCanary.install(this);
+        //LeakCanary.install(this);
     }
 }

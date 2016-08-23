@@ -188,6 +188,10 @@ public class InputActivity extends AppCompatActivity{
         }
         super.onBackPressed();
     }
-
+    @Override
+    public void onMultiWindowModeChanged(boolean isInMultiWindowMode){
+        super.onMultiWindowModeChanged(isInMultiWindowMode);
+        mojiInputLayout.onMultiWindowModeChanged(isInMultiWindowMode);
+    }
 
 }
