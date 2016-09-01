@@ -5,7 +5,6 @@ import android.content.Context;
 
 import com.makemoji.keyboard.MMKB;
 import com.makemoji.mojilib.Moji;
-import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by Scott Baar on 12/14/2015.

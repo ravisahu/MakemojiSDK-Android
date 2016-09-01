@@ -21,15 +21,15 @@ android {
 
 dependencies {
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support:design:24.1.1'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+   // debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+   // releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 
     compile 'com.google.android.gms:play-services-ads:9.4.0'
 
-    compile 'com.makemoji:makemoji-sdk-android:0.9.740'
-    compile 'com.makemoji:makemoji-3pk-android:0.9.740'
+    compile 'com.makemoji:makemoji-sdk-android:0.9.750'
+    compile 'com.makemoji:makemoji-3pk-android:0.9.750'
 
 }
 
