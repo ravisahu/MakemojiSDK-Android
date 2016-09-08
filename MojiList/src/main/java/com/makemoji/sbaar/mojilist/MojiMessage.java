@@ -24,7 +24,7 @@ public class MojiMessage {
     }
     public MojiMessage(String html){
         messageRaw = html;
-        id = String.valueOf((new Random().nextFloat()));
+        id = "s"+ html.hashCode();
 
     }
 }

@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'password'
+            keyPassword 'password'
+            storeFile file('passwordstore.jks')
+            storePassword 'password'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion '23.0.3'
-
     defaultConfig {
         applicationId "com.makemoji.sbaar.mojilist"
         minSdkVersion 15
@@ -13,7 +20,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -23,14 +31,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
-   // debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-   // releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
-
+    // debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    // releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     compile 'com.google.android.gms:play-services-ads:9.4.0'
-
-    compile 'com.makemoji:makemoji-sdk-android:0.9.752'
-    compile 'com.makemoji:makemoji-3pk-android:0.9.752'
-
+    compile 'com.makemoji:makemoji-sdk-android:0.9.753'
+    compile 'com.makemoji:makemoji-3pk-android:0.9.753'
 }
 
 repositories {
