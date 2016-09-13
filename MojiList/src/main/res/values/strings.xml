@@ -5,7 +5,7 @@
     <string name="action_text_down">Text Size -</string>
     <string name="action_toggle_simple">Simple/Chat</string>
     <string name="action_jiggle">Jiggle</string>
-    <string name="title_activity_input">MakeMoji Sample</string>
-    <string name="_mm_kb_label">MakeMoji Keyboard (Sample App)</string>
+    <string name="title_activity_input">Makemoji Sample</string>
+    <string name="_mm_kb_label">Makemoji Keyboard (Sample App)</string>
     <string name="_mm_kb_settings_activity">com.makemoji.sbaar.mojilist.ActivateActivity</string>
 </resources>

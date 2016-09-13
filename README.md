@@ -160,7 +160,7 @@ There are two key methods to use when displaying messages that are necessary for
 Moji.setText(String html,TextView tv, boolean simple) parses the HTML and places it into a TextView, beginning any Hypermoji/gif animation of the new text and ending animation of any existing text. The "simple" argument ignores any other attributes like size or font. It should usually be set to true.
 
 
-Set a HyperMojiClickListener on each TextView you use, like so
+Set a global HyperMojiClickListener using Moji.setDefaultHyperMojiListener(...), or one on each TextView you use, like so
 ```java
             textView.setTag(R.id._makemoji_hypermoji_listener_tag_id, new HyperMojiListener() {
                 @Override

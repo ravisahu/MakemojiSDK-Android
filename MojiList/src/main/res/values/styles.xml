@@ -45,6 +45,7 @@
     _mm_minimumSendLength -> minimum characters to enter before the send layout is enabled.
 
     To styles the edit text, define a editTextStyle in a theme set the theme attribute in this view.
+    Look at integer.xml and bool.xml to customize the number of rows and memory optimization.
 
     If you need additional customization, just ask or examine mm_moji_input_layout.xml and play around with findViewById.
 
