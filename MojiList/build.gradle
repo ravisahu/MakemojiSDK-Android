@@ -34,8 +34,8 @@ dependencies {
     // debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
     // releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     compile 'com.google.android.gms:play-services-ads:9.4.0'
-    compile 'com.makemoji:makemoji-sdk-android:0.9.757'
-    compile 'com.makemoji:makemoji-3pk-android:0.9.757'
+    compile 'com.makemoji:makemoji-sdk-android:0.9.758'
+    compile 'com.makemoji:makemoji-3pk-android:0.9.758'
 }
 
 repositories {
